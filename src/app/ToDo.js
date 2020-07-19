@@ -17,9 +17,18 @@ export const ToDo = () => {
           value={task.text}
           onChange={(event) => editTask(task, event.target.value)}
         />
+        <button className="DeleteBtn" onClick={(event) => deleteTask(task)}>
+          ×
+        </button>
       </div>
     ));
     return tasks.map((task) => task);
+  };
+
+  const addTask = (array) => {
+    let oldTasks = Tasks;
+    const newTask = { key: oldTasks.length + 1, text: "New task" };
+    setTasks((Tasks) => [...oldTasks, newTask]); //Правильно ли делать так?
   };
 
   const editTask = (task, value) => {
@@ -29,13 +38,14 @@ export const ToDo = () => {
         el.text = value;
       }
     });
-    setTasks((oldTasks) => [...oldTasks]); //Правильно ли делать так?
+    setTasks((Tasks) => [...oldTasks]); //Правильно ли делать так?
   };
 
-  const addTask = (array) => {
-    const oldTasks = Tasks;
-    const newTask = { key: oldTasks.length + 1, text: "New task" };
-    setTasks((oldTasks) => [...oldTasks, newTask]); //Правильно ли делать так?
+  const deleteTask = (task) => {
+    console.log(task.key);
+    let oldTasks = Tasks;
+    let newTasks = oldTasks.filter((el) => el.key !== task.key);
+    setTasks((Tasks) => [...newTasks]); //Правильно ли делать так?
   };
 
   return (
@@ -45,7 +55,7 @@ export const ToDo = () => {
       </div>
       <div className="TaskBlock">{showTasks(Tasks)}</div>
       <button
-        className="AddTask"
+        className="AddBtn"
         onClick={(event) => {
           addTask();
         }}
