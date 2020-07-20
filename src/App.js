@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
+import { ToDo } from "./app/ToDo";
 
 function App() {
-  return <div>Hello world</div>;
+  return <ToDo />;
 }
 
 export default App;

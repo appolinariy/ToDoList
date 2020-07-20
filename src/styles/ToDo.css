@@ -1,0 +1,78 @@
+.ToDoList {
+  display: flex;
+  flex-direction: column;
+  max-width: 65%;
+  height: 58vh;
+  box-sizing: border-box;
+  margin: 50px auto 0 auto;
+  padding: 0 20px 0 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.Title {
+  color: #1b262c;
+  border-bottom: 5px solid #1b262c;
+}
+
+.TaskBlock {
+  display: flex;
+  flex-direction: column;
+  height: 55%;
+  overflow-y: auto;
+  margin-top: 15px;
+}
+
+.Task {
+  display: inline-flex;
+  align-items: baseline;
+
+  margin-top: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 20px;
+}
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+input[type="text"] {
+  font-size: 11pt;
+  border: none;
+  padding: 5px;
+}
+input[type="text"]:hover {
+  cursor: pointer;
+  border-bottom: 1px solid #1b262c;
+}
+
+.AddBtn {
+  color: #1b262c;
+  all: unset;
+  text-align: center;
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  margin-top: 40px;
+  background-color: #bbe1fae3;
+}
+.AddBtn:hover {
+  cursor: pointer;
+  background-color: #add9f6;
+}
+
+.DeleteBtn {
+  color: #1b262c;
+  all: unset;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  margin-left: 15px;
+  background-color: rgba(255, 99, 71, 0.507);
+  align-items: flex-end;
+}
+.DeleteBtn:hover {
+  cursor: pointer;
+  background-color: rgba(255, 99, 71, 0.671);
+}
