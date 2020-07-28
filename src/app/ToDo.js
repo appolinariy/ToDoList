@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "../styles/ToDo.css";
+import { showTask } from "../app/showTasks";
 
 export const ToDo = () => {
-  const [Tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState([
     { key: 1, text: "Watch the film" },
     { key: 2, text: "Prepare to exam" },
     { key: 3, text: "Read the book" },
   ]);
 
   const showTasks = (array) => {
-    let tasks = Tasks.map((task) => (
+    let newTasks = tasks.map((task) => (
       <div className="Task">
         <input type="checkbox" id={task.key} />
         <input
@@ -17,35 +18,32 @@ export const ToDo = () => {
           value={task.text}
           onChange={(event) => editTask(task, event.target.value)}
         />
-        <button className="DeleteBtn" onClick={(event) => deleteTask(task)}>
+        <button className="DeleteBtn" onClick={() => deleteTask(task)}>
           ×
         </button>
       </div>
     ));
-    return tasks.map((task) => task);
+    return newTasks.map((task) => task);
   };
 
   const addTask = (array) => {
-    let oldTasks = Tasks;
-    const newTask = { key: oldTasks.length + 1, text: "New task" };
-    setTasks((Tasks) => [...oldTasks, newTask]); //Правильно ли делать так?
+    const newTasks = { key: tasks.length + 1, text: "New task" };
+    setTasks([...tasks, newTasks]);
   };
 
   const editTask = (task, value) => {
-    let oldTasks = Tasks;
-    oldTasks.map((el) => {
+    const newTasks = tasks.map((el) => {
       if (el.key === task.key) {
-        el.text = value;
+        return { ...el, text: value };
       }
+      return el;
     });
-    setTasks((Tasks) => [...oldTasks]); //Правильно ли делать так?
+    setTasks(newTasks);
   };
 
   const deleteTask = (task) => {
-    console.log(task.key);
-    let oldTasks = Tasks;
-    let newTasks = oldTasks.filter((el) => el.key !== task.key);
-    setTasks((Tasks) => [...newTasks]); //Правильно ли делать так?
+    const newTasks = tasks.filter((el) => el.key !== task.key);
+    setTasks(newTasks);
   };
 
   return (
@@ -53,7 +51,7 @@ export const ToDo = () => {
       <div className="Title">
         <h2>Simple To Do List</h2>
       </div>
-      <div className="TaskBlock">{showTasks(Tasks)}</div>
+      <div className="TaskBlock">{showTasks(tasks)}</div>
       <button
         className="AddBtn"
         onClick={(event) => {
