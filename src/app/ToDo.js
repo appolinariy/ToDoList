@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/ToDo.css";
-import { showTask } from "../app/showTasks";
+import { TaskList } from "./TaskList";
 
 export const ToDo = () => {
   const [tasks, setTasks] = useState([
@@ -9,25 +9,9 @@ export const ToDo = () => {
     { key: 3, text: "Read the book" },
   ]);
 
-  const showTasks = (array) => {
-    let newTasks = tasks.map((task) => (
-      <div className="Task">
-        <input type="checkbox" id={task.key} />
-        <input
-          type="text"
-          value={task.text}
-          onChange={(event) => editTask(task, event.target.value)}
-        />
-        <button className="DeleteBtn" onClick={() => deleteTask(task)}>
-          ×
-        </button>
-      </div>
-    ));
-    return newTasks.map((task) => task);
-  };
-
-  const addTask = (array) => {
-    const newTasks = { key: tasks.length + 1, text: "New task" };
+  const addTask = (e) => {
+    let newKey = tasks[tasks.length - 1].key + 1;
+    const newTasks = { key: newKey, text: "New task" };
     setTasks([...tasks, newTasks]);
   };
 
@@ -51,13 +35,8 @@ export const ToDo = () => {
       <div className="Title">
         <h2>Simple To Do List</h2>
       </div>
-      <div className="TaskBlock">{showTasks(tasks)}</div>
-      <button
-        className="AddBtn"
-        onClick={(event) => {
-          addTask();
-        }}
-      >
+      <TaskList tasks={tasks} editTask={editTask} addTask={addTask} deleteTask={deleteTask} />
+      <button className="AddBtn" onClick={addTask}>
         + Add Task
       </button>
     </div>
